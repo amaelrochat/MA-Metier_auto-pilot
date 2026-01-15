@@ -1,6 +1,7 @@
 from SimConnect import AircraftRequests, SimConnect
 from src.models.airships.airship_interface import AirshipInterface
 
+
 class VirtualAirship(AirshipInterface):
     def __init__(self):
         self._simconnect = SimConnect()

@@ -1,14 +1,15 @@
-from src.factories.airship_factory import AirshipFactory
-from src.factories.pilot_factory import PilotFactory
+import sys
+import os
+from src.commands.default import default
 
-def main():
-    airship = AirshipFactory.get_airship("VirtualAirship")
-    pilot = PilotFactory.get_pilot("StarterPilot", airship)
+arguments = sys.argv[1:]
 
-    pilot.main()
+if not arguments:
+    default()
+    exit(0)
 
-    while True:
-        pilot.loop()
-
-if __name__ == "__main__":
-    main()
+if os.path.exists("src/commands/{}.py".format(arguments[0])):
+    command_module = __import__(
+        "src.commands.{}".format(arguments[0]), fromlist=[''])
+    command = getattr(command_module, arguments[0])
+    exit(command(arguments[1:]))

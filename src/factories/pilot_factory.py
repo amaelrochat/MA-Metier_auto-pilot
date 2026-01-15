@@ -1,5 +1,6 @@
 from src.models.pilots.starter_pilot import StarterPilot
 
+
 class PilotFactory:
     @staticmethod
     def get_pilot(pilot_type, *args, **kwargs):
