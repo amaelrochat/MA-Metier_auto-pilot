@@ -10,7 +10,7 @@ from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from src.databases.database import Base
 
-class commands(Base):
+class Command(Base):
     __tablename__ = "commands"
 
     id = Column(Integer, primary_key=True)

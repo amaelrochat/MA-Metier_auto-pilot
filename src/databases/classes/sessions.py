@@ -11,7 +11,7 @@ from sqlalchemy import Column, Integer, String, DATETIME
 from sqlalchemy.orm import relationship
 from src.databases.database import Base
 
-class sessions(Base):
+class Session(Base):
     __tablename__ = "sessions"
 
     id = Column(Integer, primary_key=True)
@@ -29,6 +29,6 @@ class sessions(Base):
         Initialize a session instance
         Accepts keyword arguments for all attributes
         """
-        self.date_time = datetime.strptime(kwargs.get("date_time"), "%d.%m.%Y %H:%M")
+        self.date_time = datetime.strptime(kwargs.get("date_time"), "%Y-%m-%d %H:%M")
         self.glider_model = kwargs.get("glider_model")
         self.takeoff_location = kwargs.get("takeoff_location")

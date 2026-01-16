@@ -11,7 +11,7 @@ from sqlalchemy import Column, Integer, Time, ForeignKey
 from sqlalchemy.orm import relationship
 from src.databases.database import Base
 
-class telemetrics(Base):
+class Telemetry(Base):
     __tablename__ = "telemetrics"
 
     id = Column(Integer, primary_key=True)
