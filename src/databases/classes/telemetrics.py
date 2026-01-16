@@ -9,7 +9,7 @@ Version : V 0.1
 from datetime import time
 from sqlalchemy import Column, Integer, Time, ForeignKey
 from sqlalchemy.orm import relationship
-from database import Base
+from src.databases.database import Base
 
 class telemetrics(Base):
     __tablename__ = "telemetrics"

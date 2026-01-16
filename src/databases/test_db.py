@@ -6,16 +6,17 @@ Description : Test the ORM
 Version : V 0.1
 """
 
-from classes.sessions import sessions
-from classes.telemetrics import telemetrics
-from classes.commands import commands
-from database import *
+from src.databases.classes.sessions import sessions
+from src.databases.classes.telemetrics import telemetrics
+from src.databases.classes.commands import commands
+from src.databases.database import *
 
 #CREATE TABLE
 Base.metadata.create_all(bind=engine)
 
 s = SessionLocal()
-"""
+
+#create entry
 obj = sessions(date_time="15.01.2026 15:41",
                glider_model="glider",
                takeoff_location="ste-croix")
@@ -51,7 +52,27 @@ obj = telemetrics(
 s.add(obj)
 s.commit()
 s.refresh(obj)
-"""
+
+obj = commands(
+    x_handle=90,
+    y_handle=-90,
+    crossbar=45,
+    session_id=1)
+s.add(obj)
+s.commit()
+s.refresh(obj)
+
+obj = commands(
+    x_handle=45,
+    y_handle=0,
+    crossbar=0,
+    session_id=2)
+s.add(obj)
+s.commit()
+s.refresh(obj)
+
+
+#get data
 print("\nall telemetrics")
 for t in s.query(telemetrics).all():
     print(t.coordonate, t.altitude, t.session_id, t.session.glider_model, t.session.takeoff_location)

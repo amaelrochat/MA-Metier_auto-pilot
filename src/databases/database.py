@@ -10,7 +10,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 #ENGINE CONFIGURATION
-engine = create_engine("sqlite:///database.db")
+engine = create_engine("sqlite:///src/databases/database.db")
 
 #DECLARATIVE BASE
 Base = declarative_base()
