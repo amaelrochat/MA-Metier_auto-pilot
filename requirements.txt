@@ -1,1 +1,4 @@
 SimConnect===0.4.26
+pytest===9.0.2
+pytest-cov===7.0.0
+autopep8===2.3.2
