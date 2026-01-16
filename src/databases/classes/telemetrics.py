@@ -6,10 +6,10 @@ Description : Class model of a telemetry for the ORM
 Version : V 0.1
 """
 
-from datetime import datetime
+from datetime import time
 from sqlalchemy import Column, Integer, Time, ForeignKey
 from sqlalchemy.orm import relationship
-from ..database import Base
+from database import Base
 
 class telemetrics(Base):
     __tablename__ = "telemetrics"
@@ -36,5 +36,5 @@ class telemetrics(Base):
         self.altitude = kwargs.get("altitude")
         self.horizontal_speed = kwargs.get("horizontal_speed")
         self.vertical_speed = kwargs.get("vertical_speed")
-        self.time_since_departure = datetime.strptime(kwargs.get("time_since_departure"), "%H:%M")
+        self.time_since_departure = time.strptime(kwargs.get("time_since_departure"), "%H:%M")
         self.session_id = kwargs.get("session_id")

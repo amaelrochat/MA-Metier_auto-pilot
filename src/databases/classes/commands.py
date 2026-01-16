@@ -8,7 +8,7 @@ Version : V 0.1
 
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from ..database import Base
+from database import Base
 
 class commands(Base):
     __tablename__ = "commands"

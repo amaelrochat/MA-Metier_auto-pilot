@@ -9,7 +9,7 @@ Version : V 0.1
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DATETIME
 from sqlalchemy.orm import relationship
-from ..database import Base
+from database import Base
 
 class sessions(Base):
     __tablename__ = "sessions"
