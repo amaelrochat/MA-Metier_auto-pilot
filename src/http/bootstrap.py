@@ -1,4 +1,5 @@
 import os
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 from fastapi import FastAPI
 
@@ -21,6 +22,9 @@ def load_modules_from_directory(directory: str, callback: callable):
 
 load_modules_from_directory(
     "controllers", lambda module: app.include_router(module.router, prefix="/api"))
+
+app.mount("/", StaticFiles(directory="src/http/public",
+                           html=True), name="public")
 
 uvicorn.run(app, port=os.getenv("WEB_PORT", 8000),
             host=os.getenv("WEB_HOST", "127.0.0.1"))

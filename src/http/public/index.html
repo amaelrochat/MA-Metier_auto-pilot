@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aircraft Controller</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 1000px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .controls-wrapper {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .joystick-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      .joystick-wrapper {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        background-color: #f0f0f0;
+        border: 3px solid #333;
+        border-radius: 50%;
+        touch-action: none;
+        cursor: grab;
+      }
+      .joystick-wrapper:active {
+        cursor: grabbing;
+      }
+      .joystick-stick {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: #007bff;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: grab;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+      .joystick-center {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #999;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .joystick-values {
+        text-align: center;
+        font-size: 14px;
+        color: #555;
+      }
+      .control-group {
+        margin: 15px 0;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+      }
+      input[type="range"] {
+        width: 100%;
+        height: 8px;
+      }
+      .value-display {
+        text-align: right;
+        color: #777;
+        font-size: 12px;
+      }
+      #status {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #e9f5ff;
+        border-radius: 4px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>✈️ Aircraft Controller</h1>
+
+      <div class="controls-wrapper">
+        <div class="joystick-container">
+          <label>Control Stick</label>
+          <div class="joystick-wrapper" id="joystick">
+            <div class="joystick-stick" id="joystick-stick"></div>
+            <div class="joystick-center"></div>
+          </div>
+          <div class="joystick-values">
+            <div>Aileron: <span id="aileron-value">0</span></div>
+            <div>Elevator: <span id="elevator-value">0</span></div>
+          </div>
+        </div>
+
+        <div class="joystick-container">
+          <label>Other Controls</label>
+          <div class="control-group">
+            <label for="throttle"
+              >Throttle:
+              <span class="value-display" id="throttle-value">0</span></label
+            >
+            <input type="range" id="throttle" min="0" max="100" value="0" />
+          </div>
+
+          <div class="control-group">
+            <label for="rudder"
+              >Rudder:
+              <span class="value-display" id="rudder-value">0</span></label
+            >
+            <input type="range" id="rudder" min="-100" max="100" value="0" />
+          </div>
+
+          <div class="control-group">
+            <label for="spoiler"
+              >Spoiler:
+              <span class="value-display" id="spoiler-value">0</span></label
+            >
+            <input type="range" id="spoiler" min="0" max="100" value="0" />
+          </div>
+        </div>
+      </div>
+
+      <div id="status"></div>
+    </div>
+
+    <script>
+      let joystickX = 0;
+      let joystickY = 0;
+      const joystickElement = document.getElementById("joystick");
+      const joystickStick = document.getElementById("joystick-stick");
+      const joystickRadius = joystickElement.offsetWidth / 2;
+      const stickRadius = joystickStick.offsetWidth / 2;
+
+      function handleJoystickMove(clientX, clientY) {
+        const rect = joystickElement.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        let x = clientX - centerX;
+        let y = clientY - centerY;
+        const distance = Math.sqrt(x * x + y * y);
+        const maxDistance = joystickRadius - stickRadius;
+
+        if (distance > maxDistance) {
+          x = (x / distance) * maxDistance;
+          y = (y / distance) * maxDistance;
+        }
+
+        joystickX = parseFloat((x / maxDistance).toFixed(2));
+        joystickY = parseFloat((-y / maxDistance).toFixed(2));
+
+        joystickStick.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+
+        document.getElementById("aileron-value").textContent = joystickX;
+        document.getElementById("elevator-value").textContent = joystickY;
+
+        sendControls();
+      }
+
+      let isJoystickActive = false;
+
+      joystickElement.addEventListener("mousedown", () => {
+        isJoystickActive = true;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isJoystickActive) {
+          handleJoystickMove(e.clientX, e.clientY);
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isJoystickActive = false;
+        joystickX = 0;
+        joystickY = 0;
+        joystickStick.style.transform = "translate(-50%, -50%)";
+        document.getElementById("aileron-value").textContent = "0";
+        document.getElementById("elevator-value").textContent = "0";
+        sendControls();
+      });
+
+      let isTouchActive = false;
+
+      const handleTouchMove = (e) => {
+        if (isTouchActive) {
+          handleJoystickMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      };
+
+      joystickElement.addEventListener("touchstart", () => {
+        isTouchActive = true;
+      });
+
+      document.addEventListener("touchmove", handleTouchMove);
+
+      document.addEventListener("touchend", () => {
+        isTouchActive = false;
+        joystickX = 0;
+        joystickY = 0;
+        joystickStick.style.transform = "translate(-50%, -50%)";
+        document.getElementById("aileron-value").textContent = "0";
+        document.getElementById("elevator-value").textContent = "0";
+        sendControls();
+      });
+
+      const sliders = ["throttle", "rudder", "spoiler"];
+
+      sliders.forEach((id) => {
+        document.getElementById(id).addEventListener("input", (e) => {
+          document.getElementById(`${id}-value`).textContent = e.target.value;
+          sendControls();
+        });
+      });
+
+      async function sendControls() {
+        const controls = {
+          throttle: parseInt(document.getElementById("throttle").value),
+          aileron_position: joystickX,
+          rudder_position: parseInt(document.getElementById("rudder").value),
+          elevator_position: joystickY,
+          spoiler_position: parseInt(document.getElementById("spoiler").value),
+        };
+
+        try {
+          const response = await fetch("/api/aircraft", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(controls),
+          });
+          const data = await response.json();
+          showStatus("Controls sent successfully!", "success");
+        } catch (error) {
+          showStatus("Error sending controls: " + error.message, "error");
+        }
+      }
+
+      function showStatus(message, type) {
+        const statusDiv = document.getElementById("status");
+        statusDiv.textContent = message;
+        statusDiv.style.display = "block";
+        statusDiv.style.backgroundColor =
+          type === "success" ? "#e9f5ff" : "#ffe9e9";
+      }
+    </script>
+  </body>
+</html>
