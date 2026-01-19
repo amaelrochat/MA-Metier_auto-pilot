@@ -23,6 +23,7 @@ class Session(Base):
 
         Accepts keyword arguments for all attributes
         """
-        self.date_time = datetime.strptime(kwargs.get("date_time"), "%Y-%m-%d %H:%M")
+        self.date_time = datetime.strptime(
+            kwargs.get("date_time"), "%Y-%m-%d %H:%M")
         self.glider_model = kwargs.get("glider_model")
         self.takeoff_location = kwargs.get("takeoff_location")

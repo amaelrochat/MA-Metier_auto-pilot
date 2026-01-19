@@ -1,11 +1,10 @@
+from src.databases.classes.commands import Command
+from src.databases.classes.telemetrics import Telemetry
+from src.databases.classes.sessions import Session
+from src.databases.database import SessionLocal, Base, engine
 import os
 
 os.environ["DATABASES_URI"] = "sqlite:///src/databases/test_database.db"
-
-from src.databases.database import SessionLocal, Base, engine
-from src.databases.classes.sessions import Session
-from src.databases.classes.telemetrics import Telemetry
-from src.databases.classes.commands import Command
 
 
 def test_create_session():
@@ -44,7 +43,8 @@ def test_create_session():
         .filter(Session.date_time == "2026-01-15 15:41:00.000000")
         .first()
     )
-    telemetry = s.query(Telemetry).filter(Telemetry.coordonate == 46.8223).first()
+    telemetry = s.query(Telemetry).filter(
+        Telemetry.coordonate == 46.8223).first()
     command = s.query(Command).filter(Command.x_handle == 90).first()
 
     assert telemetry.Session.id == session.id
