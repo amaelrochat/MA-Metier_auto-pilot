@@ -2,3 +2,6 @@ SimConnect===0.4.26
 pytest===9.0.2
 pytest-cov===7.0.0
 autopep8===2.3.2
+fastapi==0.116.1
+uvicorn==0.35.0
+python-dotenv==1.0.0
