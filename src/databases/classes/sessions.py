@@ -1,11 +1,3 @@
-"""
-Program name : sessions.py
-Date : 15.01.2026
-Edit : 15.01.2026
-Description : Class model of a session for the ORM
-Version : V 0.1
-"""
-
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DATETIME
 from sqlalchemy.orm import relationship
@@ -20,8 +12,8 @@ class Session(Base):
     takeoff_location = Column(String, nullable=False)
 
     #relations
-    telemetry = relationship("telemetrics", back_populates="session")
-    command = relationship("commands", back_populates="session")
+    Telemetry = relationship("Telemetry", back_populates="Session")
+    Command = relationship("Command", back_populates="Session")
 
 
     def __init__(self, **kwargs):

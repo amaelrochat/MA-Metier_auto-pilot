@@ -10,16 +10,17 @@ def test_create_session():
     Base.metadata.create_all(bind=engine)
 
     s = SessionLocal()
-    obj = Session(date_time="2026-01-15 15:41",
-               glider_model="glider",
-               takeoff_location="ste-croix")
+    obj = Command(x_handle=90,
+                  y_handle=-90,
+                  crossbar=45,
+                  session_id=1)
     s.add(obj)
     s.commit()
     s.refresh(obj)
 
-    r = s.query(Session).filter(Session.date_time == "2026-01-15 15:41:00.000000").first()
+    r = s.query(Command).filter(Command.x_handle == 90).first()
 
-    assert r.takeoff_location == obj.takeoff_location
+    assert r.session_id == obj.session_id
 
     s.close()
     engine.dispose()

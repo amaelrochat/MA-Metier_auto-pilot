@@ -1,11 +1,3 @@
-"""
-Program name : telemetrics.py
-Date : 15.01.2026
-Edit : 15.01.2026
-Description : Class model of a telemetry for the ORM
-Version : V 0.1
-"""
-
 from datetime import time
 from sqlalchemy import Column, Integer, Time, ForeignKey
 from sqlalchemy.orm import relationship
@@ -24,7 +16,7 @@ class Telemetry(Base):
     session_id = Column(Integer, ForeignKey("sessions.id"))
 
     #relation
-    session = relationship("sessions", back_populates="telemetry")
+    Session = relationship("Session", back_populates="Telemetry")
 
     
     def __init__(self, **kwargs):

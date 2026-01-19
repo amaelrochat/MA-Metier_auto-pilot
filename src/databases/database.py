@@ -1,11 +1,3 @@
-"""
-Program name : database.py
-Date : 15.01.2026
-Edit : 15.01.2026
-Description : Sqlalchemy config
-Version : V 0.1
-"""
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 import os

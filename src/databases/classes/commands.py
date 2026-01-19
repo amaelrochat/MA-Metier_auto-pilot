@@ -1,11 +1,3 @@
-"""
-Program name : commands.py
-Date : 15.01.2026
-Edit : 15.01.2026
-Description : Class model of a command for the ORM
-Version : V 0.1
-"""
-
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from src.databases.database import Base
@@ -21,7 +13,7 @@ class Command(Base):
     session_id = Column(Integer, ForeignKey("sessions.id"))
 
     #relation
-    session = relationship("sessions", back_populates="command")
+    Session = relationship("Session", back_populates="Command")
 
     
     def __init__(self, **kwargs):
