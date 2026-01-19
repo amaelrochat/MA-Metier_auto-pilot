@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 
 from src.databases.database import Base
 
+
 class Command(Base):
     __tablename__ = "commands"
 
@@ -13,13 +14,12 @@ class Command(Base):
 
     session_id = Column(Integer, ForeignKey("sessions.id"))
 
-    #relation
+    # relation
     Session = relationship("Session", back_populates="Command")
 
-    
     def __init__(self, **kwargs):
         """Initialize a command instance
-        
+
         Accepts keyword arguments for all attributes
         """
         self.x_handle = kwargs.get("x_handle")
