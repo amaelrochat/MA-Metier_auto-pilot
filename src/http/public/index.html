@@ -173,7 +173,7 @@
         }
 
         joystickX = parseFloat((x / maxDistance).toFixed(2));
-        joystickY = parseFloat((-y / maxDistance).toFixed(2));
+        joystickY = parseFloat((y / maxDistance).toFixed(2));
 
         joystickStick.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
 
