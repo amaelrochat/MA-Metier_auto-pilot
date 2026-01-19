@@ -26,5 +26,5 @@ load_modules_from_directory(
 app.mount("/", StaticFiles(directory="src/http/public",
                            html=True), name="public")
 
-uvicorn.run(app, port=os.getenv("WEB_PORT", 8000),
+uvicorn.run(app, port=int(os.getenv("WEB_PORT", 8000)),
             host=os.getenv("WEB_HOST", "127.0.0.1"))
