@@ -1,6 +1,8 @@
 from datetime import time
+
 from sqlalchemy import Column, Integer, Time, ForeignKey
 from sqlalchemy.orm import relationship
+
 from src.databases.database import Base
 
 class Telemetry(Base):
@@ -20,8 +22,8 @@ class Telemetry(Base):
 
     
     def __init__(self, **kwargs):
-        """
-        Initialize a telemetry instance
+        """Initialize a telemetry instance
+        
         Accepts keyword arguments for all attributes
         """
         self.coordonate = kwargs.get("coordonate")

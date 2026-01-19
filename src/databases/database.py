@@ -1,13 +1,14 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
 import os
 
-#ENGINE CONFIGURATION
-path = os.getenv("DATABASES_URI") or "sqlite:///src/databases/database.db"
-engine = create_engine(path)
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-#DECLARATIVE BASE
+# Engine configuration
+DATABASE_URI = os.getenv("DATABASES_URI", "sqlite:///src/databases/database.db")
+engine = create_engine(DATABASE_URI)
+
+# Declarative base
 Base = declarative_base()
 
-#SESSION FACTORY
+# Session factory
 SessionLocal = sessionmaker(bind=engine)

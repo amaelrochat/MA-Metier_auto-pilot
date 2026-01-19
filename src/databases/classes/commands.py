@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
+
 from src.databases.database import Base
 
 class Command(Base):
@@ -17,8 +18,8 @@ class Command(Base):
 
     
     def __init__(self, **kwargs):
-        """
-        Initialize a command instance
+        """Initialize a command instance
+        
         Accepts keyword arguments for all attributes
         """
         self.x_handle = kwargs.get("x_handle")
