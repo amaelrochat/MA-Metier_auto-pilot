@@ -1,6 +1,6 @@
 ```mermaid
 classDiagram
-    class AirshipInterface {
+    class AircraftInterface {
         +altitude: float
         +speed: float
         +start_engine(): void
@@ -8,7 +8,7 @@ classDiagram
         +throttle(value: float): void
     }
 
-    class VirtualAirship {
+    class VirtualAircraft {
         -_simconnect: SimConnect
         -_aircraft: AircraftRequests
         +__init__(): void
@@ -19,20 +19,7 @@ classDiagram
         +throttle(value: float): void
     }
 
-    class PilotInterface {
-        -_airship: AirshipInterface
-        +__init__(airship: AirshipInterface): void
-        +main(): void
-        +loop(): void
-    }
+    VirtualAircraft --|> AircraftInterface
 
-    class StarterPilot {
-        +main(): void
-        +loop(): void
-    }
-
-    StarterPilot --|> PilotInterface
-    VirtualAirship --|> AirshipInterface
-
-    VirtualAirship ..> SimConnect
+    VirtualAircraft ..> SimConnect
 ```
