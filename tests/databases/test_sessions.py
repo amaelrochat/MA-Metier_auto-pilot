@@ -1,11 +1,9 @@
-import os
-
-os.environ["DATABASES_URI"] = "sqlite:///src/databases/test_database.db"
-
-from src.databases.classes.commands import Command
-from src.databases.classes.telemetrics import Telemetry
-from src.databases.classes.sessions import Session
+import tests.databases.helper
 from src.databases.database import SessionLocal, Base, engine
+from src.databases.classes.sessions import Session
+from src.databases.classes.telemetrics import Telemetry
+from src.databases.classes.commands import Command
+import os
 
 
 def test_create_session():

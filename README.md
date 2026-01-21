@@ -4,7 +4,7 @@ This repository contains the code and resources for the MA-Metier_auto-pilot pro
 
 ## Gettings Started
 ### Prerequisites
-- Python 3.13 or higher
+- Python 3.14 or higher
 - Microsoft Fligt Simulator
 
 ### Installation
