@@ -20,6 +20,7 @@ def test_create_telemetry():
         ground_altitude=500.0,
         speed=120.5,
         heading=45.0
+        grousnd_speed=130.0
     )
 
     s.add(obj)

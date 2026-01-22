@@ -23,6 +23,7 @@ def test_create_relations():
         ground_altitude=500.0,
         speed=120.0,
         heading=270.0,
+        ground_speed=130.0,
         session_id=1
     )
 

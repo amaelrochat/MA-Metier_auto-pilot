@@ -31,7 +31,6 @@ class TestVirtualAircraftProperties:
         assert virtual_aircraft.ground_altitude == 500.0
         mock_aircraft_requests.get.assert_called_with("GROUND_ALTITUDE")
 
-
     def test_ground_speed(self, virtual_aircraft, mock_aircraft_requests):
         mock_aircraft_requests.get.return_value = 140.0
         assert virtual_aircraft.ground_speed == 140.0
@@ -46,7 +45,7 @@ class TestVirtualAircraftProperties:
         mock_aircraft_requests.get.return_value = 270.0
         assert virtual_aircraft.heading == 270.0
         mock_aircraft_requests.get.assert_called_with(
-            "PLANE_HEADING_DEGREES_TRUE")
+            "MAGNETIC_COMPASS")
 
 
 class TestVirtualAircraftSetters:
@@ -102,11 +101,14 @@ class TestVirtualAircraftSetters:
 
     def test_to_array(self, virtual_aircraft, mock_aircraft_requests):
         mock_aircraft_requests.get.side_effect = [
-            10000.0, 500.0, 150.0, 270.0, 0.75, 0.1, -0.05, 0.0, 0.0]
+            10000.0, 500.0, 130.0, 150.0, 270.0,
+            0.75, 0.1, -0.05, 0.0, 0.0
+        ]
         result = virtual_aircraft.to_array()
         assert result == {
             "altitude": 10000.0,
             "ground_altitude": 500.0,
+            "ground_speed": 130.0,
             "speed": 150.0,
             "heading": 270.0,
             "throttle": 0.75,

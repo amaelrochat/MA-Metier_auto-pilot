@@ -13,7 +13,7 @@ class AircraftInterface:
     def speed(self) -> float:
         """Get the current speed of the airship."""
         raise NotImplementedError("Subclasses must implement this method.")
-    
+
     @property
     def ground_speed(self) -> float:
         """Get the current ground speed of the airship."""
