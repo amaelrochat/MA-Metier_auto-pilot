@@ -8,7 +8,7 @@ import os
 os.environ["DATABASES_URI"] = "sqlite:///src/databases/test_database.db"
 
 
-def test_create_session():
+def test_create_telemetry():
     Base.metadata.create_all(bind=engine)
 
     s = SessionLocal()

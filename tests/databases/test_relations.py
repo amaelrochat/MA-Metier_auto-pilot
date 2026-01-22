@@ -6,7 +6,7 @@ from src.databases.classes.commands import Command
 import os
 
 
-def test_create_session():
+def test_create_relations():
     Base.metadata.create_all(bind=engine)
 
     s = SessionLocal()
