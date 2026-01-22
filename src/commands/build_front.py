@@ -7,7 +7,7 @@ def build_front(args):
     npm_path = shutil.which('npm')
     if not npm_path:
         raise FileNotFoundError("npm is not installed or not in PATH")
-    
+
     subprocess.run([npm_path, 'install'], cwd=front_dir, check=True)
     subprocess.run([npm_path, 'run', 'build'], cwd=front_dir, check=True)
 
