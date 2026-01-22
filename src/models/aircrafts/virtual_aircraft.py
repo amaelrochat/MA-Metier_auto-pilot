@@ -25,7 +25,7 @@ class VirtualAircraft(AircraftInterface):
 
     @property
     def heading(self) -> float:
-        return self._aircraft.get("PLANE_HEADING_DEGREES_TRUE")
+        return self._aircraft.get("MAGNETIC_COMPASS")
 
     @property
     def throttle(self) -> float:
