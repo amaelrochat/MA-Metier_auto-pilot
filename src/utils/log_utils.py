@@ -24,13 +24,14 @@ class Log():
     @staticmethod
     def telemetry_entry(session_id: int, altitude: float,
                         ground_altitude: float, speed: float,
-                        heading: float) -> Telemetry:
+                        heading: float, ground_speed: float) -> Telemetry:
         s = SessionLocal()
         obj = Telemetry(
             session_id=session_id,
             date_time=datetime.now().strftime("%Y-%m-%d %H:%M"),
             altitude=altitude,
             ground_altitude=ground_altitude,
+            ground_speed=ground_speed,
             speed=speed,
             heading=heading
         )

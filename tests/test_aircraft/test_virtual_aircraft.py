@@ -31,6 +31,12 @@ class TestVirtualAircraftProperties:
         assert virtual_aircraft.ground_altitude == 500.0
         mock_aircraft_requests.get.assert_called_with("GROUND_ALTITUDE")
 
+
+    def test_ground_speed(self, virtual_aircraft, mock_aircraft_requests):
+        mock_aircraft_requests.get.return_value = 140.0
+        assert virtual_aircraft.ground_speed == 140.0
+        mock_aircraft_requests.get.assert_called_with("GROUND_VELOCITY")
+
     def test_speed(self, virtual_aircraft, mock_aircraft_requests):
         mock_aircraft_requests.get.return_value = 150.0
         assert virtual_aircraft.speed == 150.0

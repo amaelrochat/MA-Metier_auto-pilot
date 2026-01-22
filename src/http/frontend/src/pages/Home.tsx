@@ -57,6 +57,7 @@ export default function Home() {
         groundAltitude={aircraft.ground_altitude}
         speed={aircraft.speed}
         heading={aircraft.heading}
+        groundSpeed={aircraft.ground_speed}
       />
       <div className="flex items-center justify-center gap-16 md:flex-row flex-col">
         <Joystick onMove={onJoystickMove} onRelease={onJoystickRelease} />

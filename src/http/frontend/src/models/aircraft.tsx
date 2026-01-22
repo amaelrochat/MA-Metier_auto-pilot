@@ -1,6 +1,7 @@
 export class Aircraft {
   altitude: number;
   ground_altitude: number;
+  ground_speed: number;
   speed: number;
   heading: number;
   throttle: number;
@@ -12,6 +13,7 @@ export class Aircraft {
   constructor(
     altitude: number,
     ground_altitude: number,
+    ground_speed: number,
     speed: number,
     heading: number,
     throttle: number,
@@ -29,6 +31,7 @@ export class Aircraft {
     this.rudder_position = rudder_position;
     this.elevator_position = elevator_position;
     this.spoiler_position = spoiler_position;
+    this.ground_speed = ground_speed;
   }
 
   async setThrottle(throttle: number): Promise<void> {
@@ -107,6 +110,7 @@ export class Aircraft {
     return new Aircraft(
       data.altitude,
       data.ground_altitude,
+      data.ground_speed,
       data.speed,
       data.heading,
       data.throttle,

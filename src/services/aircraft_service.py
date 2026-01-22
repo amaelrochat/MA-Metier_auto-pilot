@@ -54,5 +54,6 @@ class AircraftService:
             altitude=self.aircraft.altitude,
             ground_altitude=self.aircraft.ground_altitude,
             speed=self.aircraft.speed,
+            ground_speed=self.aircraft.ground_speed,
             heading=self.aircraft.heading
         )
