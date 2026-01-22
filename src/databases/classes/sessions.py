@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, DateTime
 from sqlalchemy.orm import relationship
 
 from src.databases.database import Base
@@ -11,8 +11,6 @@ class Session(Base):
 
     id = Column(Integer, primary_key=True)
     date_time = Column(DateTime, nullable=False)
-    glider_model = Column(String, nullable=False)
-    takeoff_location = Column(String, nullable=False)
 
     # relations
     Telemetry = relationship("Telemetry", back_populates="Session")
@@ -25,5 +23,3 @@ class Session(Base):
         """
         self.date_time = datetime.strptime(
             kwargs.get("date_time"), "%Y-%m-%d %H:%M")
-        self.glider_model = kwargs.get("glider_model")
-        self.takeoff_location = kwargs.get("takeoff_location")

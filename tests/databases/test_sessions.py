@@ -12,8 +12,6 @@ def test_create_session():
     s = SessionLocal()
     obj = Session(
         date_time="2026-01-15 15:41",
-        glider_model="glider",
-        takeoff_location="ste-croix",
     )
     s.add(obj)
     s.commit()
@@ -25,7 +23,7 @@ def test_create_session():
         .first()
     )
 
-    assert r.takeoff_location == obj.takeoff_location
+    assert r.date_time == obj.date_time
 
     s.close()
     engine.dispose()
