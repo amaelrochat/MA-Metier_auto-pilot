@@ -24,7 +24,7 @@ class Log():
     @staticmethod
     def telemetry_entry(session_id: int, altitude: float,
                         ground_altitude: float, speed: float,
-                        heading: float, ground_speed: float) -> Telemetry:
+                        heading: float, ground_speed: float, latitude: float, longitude: float, plane_angle: float) -> Telemetry:
         s = SessionLocal()
         obj = Telemetry(
             session_id=session_id,
@@ -33,8 +33,11 @@ class Log():
             ground_altitude=ground_altitude,
             ground_speed=ground_speed,
             speed=speed,
-            heading=heading
-        )
+            heading=heading,
+            latitude=latitude,
+            longitude=longitude,
+            plane_angle=plane_angle)
+
         s.add(obj)
         s.commit()
         s.refresh(obj)
