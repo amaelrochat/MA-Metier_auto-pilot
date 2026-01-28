@@ -28,7 +28,7 @@ class FakeAircraft(AircraftInterface):
     def ground_speed(self) -> float:
         # Dummy calculation
         return self._speed - (self._altitude - self._ground_altitude) * 0.01
-    
+
     @property
     def plane_angle(self) -> float:
         return self._plane_angle
