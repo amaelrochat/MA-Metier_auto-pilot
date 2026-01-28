@@ -12,8 +12,24 @@ class VirtualAircraft(AircraftInterface):
         return self._aircraft.get("PLANE_ALTITUDE")
 
     @property
+    def latitude(self) -> float:
+        return self._aircraft.get("PLANE_LATITUDE")
+
+    @property
+    def longitude(self) -> float:
+        return self._aircraft.get("PLANE_LONGITUDE")
+
+    @property
     def ground_altitude(self) -> float:
         return self._aircraft.get("GROUND_ALTITUDE")
+
+    @property
+    def ground_speed(self) -> float:
+        return self._aircraft.get("GROUND_VELOCITY")
+
+    @property
+    def plane_angle(self) -> float:
+        return self._aircraft.get("PLANE_BANK_DEGREES")
 
     @property
     def speed(self) -> float:
@@ -21,7 +37,7 @@ class VirtualAircraft(AircraftInterface):
 
     @property
     def heading(self) -> float:
-        return self._aircraft.get("PLANE_HEADING_DEGREES_TRUE")
+        return self._aircraft.get("MAGNETIC_COMPASS")
 
     @property
     def throttle(self) -> float:

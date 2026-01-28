@@ -6,33 +6,40 @@ from src.databases.classes.commands import Command
 import os
 
 
-def test_create_session():
+def test_create_relations():
     Base.metadata.create_all(bind=engine)
 
     s = SessionLocal()
     obj = Session(
-        date_time="2026-01-15 15:41",
-        glider_model="glider",
-        takeoff_location="ste-croix",
+        date_time="2026-01-15 15:41"
     )
     s.add(obj)
     s.commit()
     s.refresh(obj)
 
     obj = Telemetry(
-        coordonate=46.8223,
-        altitude=1234.5,
-        horizontal_speed=38.2,
-        vertical_speed=1.6,
-        time_since_departure="0:15",
-        session_id=1,
+        date_time="2026-01-15 15:45",
+        altitude=1500.0,
+        ground_altitude=500.0,
+        speed=120.0,
+        heading=270.0,
+        ground_speed=130.0,
+        session_id=1
     )
 
     s.add(obj)
     s.commit()
     s.refresh(obj)
 
-    obj = Command(x_handle=90, y_handle=-90, crossbar=45, session_id=1)
+    obj = Command(
+        session_id=1,
+        aileron_position=90,
+        rudder_position=-45,
+        elevator_position=30,
+        spoiler_position=15,
+        throttle=80,
+        date_time="2026-01-15 15:50"
+    )
     s.add(obj)
     s.commit()
     s.refresh(obj)
@@ -43,8 +50,8 @@ def test_create_session():
         .first()
     )
     telemetry = s.query(Telemetry).filter(
-        Telemetry.coordonate == 46.8223).first()
-    command = s.query(Command).filter(Command.x_handle == 90).first()
+        Telemetry.altitude == 1500.0).first()
+    command = s.query(Command).filter(Command.aileron_position == 90).first()
 
     assert telemetry.Session.id == session.id
     assert command.Session.id == session.id
