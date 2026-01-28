@@ -6,6 +6,7 @@ from src.databases.classes.commands import Command
 from src.analysis.slope_analysis import calculate_slope
 import os
 
+
 def test_slope_analysis():
     Base.metadata.create_all(bind=engine)
 
@@ -64,7 +65,6 @@ def test_slope_analysis():
             plane_angle=3.1
         ),
     ]
-
 
     for obj in telemetry_points:
         s.add(obj)
