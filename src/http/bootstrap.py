@@ -22,6 +22,8 @@ def load_modules_from_directory(directory: str, callback: callable):
 
 load_modules_from_directory(
     "controllers", lambda module: app.include_router(module.router, prefix="/api"))
+load_modules_from_directory(
+    "middlewares", lambda module: app.middleware("http")(module.middleware))
 
 app.mount("/", StaticFiles(directory="src/http/public",
                            html=True), name="public")

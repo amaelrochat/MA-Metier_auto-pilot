@@ -1,6 +1,6 @@
-from datetime import time
+from datetime import datetime
 
-from sqlalchemy import Column, Integer, Float, Time, ForeignKey
+from sqlalchemy import Column, Integer, Time, ForeignKey
 from sqlalchemy.orm import relationship
 
 from src.databases.database import Base
@@ -10,8 +10,7 @@ class Telemetry(Base):
     __tablename__ = "telemetrics"
 
     id = Column(Integer, primary_key=True)
-    latitude = Column(Float, nullable=False)
-    longitude = Column(Float, nullable=False)
+    coordonate = Column(Integer, nullable=False)
     altitude = Column(Integer, nullable=False)
     horizontal_speed = Column(Integer, nullable=False)
     vertical_speed = Column(Integer, nullable=False)
@@ -27,12 +26,13 @@ class Telemetry(Base):
 
         Accepts keyword arguments for all attributes
         """
+        self.coordonate = kwargs.get("coordonate")
+        self.altitude = kwargs.get("altitude")
+        self.ground_altitude = kwargs.get("ground_altitude")
+        self.ground_speed = kwargs.get("ground_speed")
+        self.speed = kwargs.get("speed")
+        self.heading = kwargs.get("heading")
+        self.session_id = kwargs.get("session_id")
         self.latitude = kwargs.get("latitude")
         self.longitude = kwargs.get("longitude")
-        self.altitude = kwargs.get("altitude")
-        self.horizontal_speed = kwargs.get("horizontal_speed")
-        self.vertical_speed = kwargs.get("vertical_speed")
-        self.time_since_departure = time.strptime(
-            kwargs.get("time_since_departure"), "%H:%M"
-        )
-        self.session_id = kwargs.get("session_id")
+        self.plane_angle = kwargs.get("plane_angle")
