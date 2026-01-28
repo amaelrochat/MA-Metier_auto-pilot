@@ -20,6 +20,7 @@ class Telemetry(Base):
     heading = Column(Float, nullable=False)
     plane_angle = Column(Float, nullable=True)
     angle_of_attack = Column(Float, nullable=True)
+    plane_pitch_angle = Column(Float, nullable=True)
 
     session_id = Column(Integer, ForeignKey("sessions.id"))
 
@@ -43,3 +44,4 @@ class Telemetry(Base):
         self.longitude = kwargs.get("longitude")
         self.plane_angle = kwargs.get("plane_angle")
         self.angle_of_attack = kwargs.get("angle_of_attack")
+        self.plane_pitch_angle = kwargs.get("plane_pitch_angle")

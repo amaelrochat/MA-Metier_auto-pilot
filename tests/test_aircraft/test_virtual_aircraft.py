@@ -68,6 +68,11 @@ class TestVirtualAircraftProperties:
         mock_aircraft_requests.get.assert_called_with(
             "ANGLE_OF_ATTACK_INDICATOR")
 
+    def test_plane_pitch_angle(self, virtual_aircraft, mock_aircraft_requests):
+        mock_aircraft_requests.get.return_value = 2.0
+        assert virtual_aircraft.plane_pitch_angle == 2.0
+        mock_aircraft_requests.get.assert_called_with("PLANE_PITCH_DEGREES")
+
 
 class TestVirtualAircraftSetters:
     def test_throttle_getter(self, virtual_aircraft, mock_aircraft_requests):
@@ -123,7 +128,7 @@ class TestVirtualAircraftSetters:
     def test_to_array(self, virtual_aircraft, mock_aircraft_requests):
         mock_aircraft_requests.get.side_effect = [
             10000.0, 0.0, 0.0, 500.0, 130.0, 150.0, 270.0,
-            0.75, 0.1, -0.05, 0.0, 0.0, 0.0, 0.0
+            0.75, 0.1, -0.05, 0.0, 0.0, 0.0, 0.0, 0.0
         ]
         result = virtual_aircraft.to_array()
         assert result == {
@@ -141,4 +146,5 @@ class TestVirtualAircraftSetters:
             "spoiler_position": 0.0,
             "plane_angle": 0.0,
             "angle_of_attack": 0.0,
+            "plane_pitch_angle": 0.0,
         }

@@ -18,6 +18,7 @@ class FakeAircraft(AircraftInterface):
         self._elevator_position = 0.0
         self._spoiler_position = 0.0
         self._angle_of_attack = 5.0
+        self._plane_pitch_angle = 2.0
 
     @property
     def altitude(self) -> float:
@@ -43,6 +44,10 @@ class FakeAircraft(AircraftInterface):
     @property
     def plane_angle(self) -> float:
         return self._plane_angle
+
+    @property
+    def plane_pitch_angle(self) -> float:
+        return self._plane_pitch_angle
 
     @property
     def angle_of_attack(self) -> float:
