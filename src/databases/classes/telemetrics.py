@@ -12,10 +12,13 @@ class Telemetry(Base):
     id = Column(Integer, primary_key=True)
     date_time = Column(DateTime, nullable=False)
     altitude = Column(Float, nullable=False)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
     ground_altitude = Column(Float, nullable=False)
     speed = Column(Float, nullable=False)
     ground_speed = Column(Float, nullable=False)
     heading = Column(Float, nullable=False)
+    plane_angle = Column(Float, nullable=True)
 
     session_id = Column(Integer, ForeignKey("sessions.id"))
 
@@ -35,3 +38,6 @@ class Telemetry(Base):
         self.speed = kwargs.get("speed")
         self.heading = kwargs.get("heading")
         self.session_id = kwargs.get("session_id")
+        self.latitude = kwargs.get("latitude")
+        self.longitude = kwargs.get("longitude")
+        self.plane_angle = kwargs.get("plane_angle")

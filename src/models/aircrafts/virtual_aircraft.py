@@ -12,6 +12,14 @@ class VirtualAircraft(AircraftInterface):
         return self._aircraft.get("PLANE_ALTITUDE")
 
     @property
+    def latitude(self) -> float:
+        return self._aircraft.get("PLANE_LATITUDE")
+
+    @property
+    def longitude(self) -> float:
+        return self._aircraft.get("PLANE_LONGITUDE")
+
+    @property
     def ground_altitude(self) -> float:
         return self._aircraft.get("GROUND_ALTITUDE")
 

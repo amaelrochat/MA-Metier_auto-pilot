@@ -21,6 +21,9 @@ def test_create_telemetry():
         speed=120.5,
         heading=45.0,
         ground_speed=130.0,
+        latitude=46.2044,
+        longitude=6.1432,
+        plane_angle=5.0
     )
 
     s.add(obj)

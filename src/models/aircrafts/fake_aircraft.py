@@ -6,6 +6,8 @@ class FakeAircraft(AircraftInterface):
 
     def __init__(self):
         self._altitude = 1000.0
+        self._latitude = 37.7749
+        self._longitude = -122.4194
         self._ground_altitude = 100.0
         self._speed = 150.0
         self._heading = 0.0
@@ -19,6 +21,14 @@ class FakeAircraft(AircraftInterface):
     @property
     def altitude(self) -> float:
         return self._altitude
+
+    @property
+    def latitude(self) -> float:
+        return self._latitude
+
+    @property
+    def longitude(self) -> float:
+        return self._longitude
 
     @property
     def ground_altitude(self) -> float:

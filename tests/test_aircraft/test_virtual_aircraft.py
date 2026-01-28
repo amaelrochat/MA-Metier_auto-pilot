@@ -47,6 +47,21 @@ class TestVirtualAircraftProperties:
         mock_aircraft_requests.get.assert_called_with(
             "MAGNETIC_COMPASS")
 
+    def test_latitude(self, virtual_aircraft, mock_aircraft_requests):
+        mock_aircraft_requests.get.return_value = 37.7749
+        assert virtual_aircraft.latitude == 37.7749
+        mock_aircraft_requests.get.assert_called_with("PLANE_LATITUDE")
+
+    def test_longitude(self, virtual_aircraft, mock_aircraft_requests):
+        mock_aircraft_requests.get.return_value = -122.4194
+        assert virtual_aircraft.longitude == -122.4194
+        mock_aircraft_requests.get.assert_called_with("PLANE_LONGITUDE")
+
+    def test_plane_angle(self, virtual_aircraft, mock_aircraft_requests):
+        mock_aircraft_requests.get.return_value = 5.0
+        assert virtual_aircraft.plane_angle == 5.0
+        mock_aircraft_requests.get.assert_called_with("PLANE_BANK_DEGREES")
+
 
 class TestVirtualAircraftSetters:
     def test_throttle_getter(self, virtual_aircraft, mock_aircraft_requests):
@@ -101,12 +116,14 @@ class TestVirtualAircraftSetters:
 
     def test_to_array(self, virtual_aircraft, mock_aircraft_requests):
         mock_aircraft_requests.get.side_effect = [
-            10000.0, 500.0, 130.0, 150.0, 270.0,
+            10000.0, 0.0, 0.0, 500.0, 130.0, 150.0, 270.0,
             0.75, 0.1, -0.05, 0.0, 0.0, 0.0
         ]
         result = virtual_aircraft.to_array()
         assert result == {
             "altitude": 10000.0,
+            "latitude": 0.0,
+            "longitude": 0.0,
             "ground_altitude": 500.0,
             "ground_speed": 130.0,
             "speed": 150.0,
@@ -117,5 +134,4 @@ class TestVirtualAircraftSetters:
             "elevator_position": 0.0,
             "spoiler_position": 0.0,
             "plane_angle": 0.0
-
         }

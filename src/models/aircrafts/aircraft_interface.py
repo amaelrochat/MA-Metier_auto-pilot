@@ -5,6 +5,16 @@ class AircraftInterface:
         raise NotImplementedError("Subclasses must implement this method.")
 
     @property
+    def latitude(self) -> float:
+        """Get the current latitude of the airship."""
+        raise NotImplementedError("Subclasses must implement this method.")
+
+    @property
+    def longitude(self) -> float:
+        """Get the current longitude of the airship."""
+        raise NotImplementedError("Subclasses must implement this method.")
+
+    @property
     def ground_altitude(self) -> float:
         """Get the current altitude above ground of the airship."""
         raise NotImplementedError("Subclasses must implement this method.")
@@ -81,6 +91,8 @@ class AircraftInterface:
     def to_array(self) -> dict:
         return {
             "altitude": self.altitude,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
             "ground_altitude": self.ground_altitude,
             "ground_speed": self.ground_speed,
             "speed": self.speed,
