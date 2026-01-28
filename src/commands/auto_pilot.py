@@ -16,8 +16,6 @@ def auto_pilot(args):
 
     while True:
         plane_state = aircraft_service.get_aircraft_state()
-        print(
-            f"Current angle: {plane_state['plane_angle']}, Heading: {plane_state['heading']}, Altitude: {plane_state['altitude']}, Aileron: {plane_state['aileron_position']}")
         current_heading = plane_state['heading']
         heading_error = heading_degrees - current_heading
 
@@ -26,6 +24,6 @@ def auto_pilot(args):
         elif heading_error < -180:
             heading_error += 360
 
-        desired_angle = heading_error * 0.1
+        desired_angle = -(heading_error * 0.5)
 
         maintain_angle(Math.radians(desired_angle))
