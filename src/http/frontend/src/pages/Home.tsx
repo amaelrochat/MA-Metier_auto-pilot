@@ -60,6 +60,7 @@ export default function Home() {
         heading={aircraft.heading}
         groundSpeed={aircraft.ground_speed}
         planeAngle={aircraft.plane_angle}
+        angleOfAttack={aircraft.angle_of_attack}
       />
 
       <div className="flex items-center justify-center gap-16 md:flex-row flex-col">

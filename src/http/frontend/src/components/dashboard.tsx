@@ -7,6 +7,7 @@ interface DashboardProps {
   heading: number;
   groundSpeed: number;
   planeAngle: number;
+  angleOfAttack: number;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({
@@ -16,6 +17,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   heading,
   groundSpeed,
   planeAngle,
+  angleOfAttack,
 }) => {
   return (
     <div className="p-8 bg-linear-to-br from-gray-900 to-gray-800 rounded-lg border border-gray-700 text-white shadow-2xl max-w-6xl mx-auto">
@@ -55,6 +57,12 @@ const Dashboard: React.FC<DashboardProps> = ({
           <p className="text-gray-400 text-sm uppercase">Plane Angle</p>
           <p className="text-xl font-bold text-cyan-400 truncate">
             {planeAngle} rad
+          </p>
+        </div>
+        <div className="bg-gray-700 p-4 rounded border border-cyan-500">
+          <p className="text-gray-400 text-sm uppercase">Angle of Attack</p>
+          <p className="text-xl font-bold text-cyan-400 truncate">
+            {angleOfAttack} rad
           </p>
         </div>
       </div>

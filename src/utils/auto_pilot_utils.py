@@ -26,3 +26,12 @@ class AutoPilotUtils:
 
         AutoPilotUtils.maintain_angle(
             aircraft_service, Math.radians(desired_angle))
+
+    @staticmethod
+    def maintain_speed(aircraft_service: AircraftService, speed_to_maintain: float):
+        plane_state = aircraft_service.get_aircraft_state()
+        current_speed = plane_state['speed']
+        speed_error = speed_to_maintain - current_speed
+
+        elevator_adjustment = max(-0.2, min(0.2, -(speed_error * 0.01)))
+        aircraft_service.set_elevator_position(elevator_adjustment)

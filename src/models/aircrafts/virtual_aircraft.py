@@ -32,6 +32,10 @@ class VirtualAircraft(AircraftInterface):
         return self._aircraft.get("PLANE_BANK_DEGREES")
 
     @property
+    def angle_of_attack(self) -> float:
+        return self._aircraft.get("ANGLE_OF_ATTACK_INDICATOR")
+
+    @property
     def speed(self) -> float:
         return self._aircraft.get("AIRSPEED_INDICATED")
 

@@ -12,6 +12,7 @@ export class Aircraft {
   rudder_position: number;
   elevator_position: number;
   spoiler_position: number;
+  angle_of_attack: number;
 
   constructor(
     altitude: number,
@@ -27,6 +28,7 @@ export class Aircraft {
     rudder_position: number,
     elevator_position: number,
     spoiler_position: number,
+    angle_of_attack: number,
   ) {
     this.altitude = altitude;
     this.latitude = latitude;
@@ -41,6 +43,7 @@ export class Aircraft {
     this.spoiler_position = spoiler_position;
     this.ground_speed = ground_speed;
     this.plane_angle = plane_angle;
+    this.angle_of_attack = angle_of_attack;
   }
 
   async setThrottle(throttle: number): Promise<void> {
@@ -133,6 +136,7 @@ export class Aircraft {
       data.rudder_position,
       data.elevator_position,
       data.spoiler_position,
+      data.angle_of_attack,
     );
   }
 }
