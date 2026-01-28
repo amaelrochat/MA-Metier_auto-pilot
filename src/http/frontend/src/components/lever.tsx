@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface LeverProps {
   title: string;
@@ -24,7 +24,10 @@ export const Lever: React.FC<LeverProps> = ({
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <label htmlFor={title.toLowerCase() + "-lever"} className="text-lg font-semibold">
+      <label
+        htmlFor={title.toLowerCase() + "-lever"}
+        className="text-lg font-semibold"
+      >
         {title}
       </label>
       <input
@@ -36,8 +39,8 @@ export const Lever: React.FC<LeverProps> = ({
         onChange={(e) => handleChange(Number(e.target.value))}
         className="w-12 h-48 cursor-pointer"
         style={{
-          writingMode: 'vertical-rl',
-          transform: 'rotate(180deg)',
+          writingMode: "vertical-rl",
+          transform: "rotate(180deg)",
         }}
       />
       <span className="text-sm text-gray-600">{position}%</span>

@@ -1,7 +1,10 @@
 export class Aircraft {
   altitude: number;
+  latitude: number;
+  longitude: number;
   ground_altitude: number;
   ground_speed: number;
+  plane_angle: number;
   speed: number;
   heading: number;
   throttle: number;
@@ -12,17 +15,22 @@ export class Aircraft {
 
   constructor(
     altitude: number,
+    latitude: number,
+    longitude: number,
     ground_altitude: number,
     ground_speed: number,
+    plane_angle: number,
     speed: number,
     heading: number,
     throttle: number,
     aileron_position: number,
     rudder_position: number,
     elevator_position: number,
-    spoiler_position: number
+    spoiler_position: number,
   ) {
     this.altitude = altitude;
+    this.latitude = latitude;
+    this.longitude = longitude;
     this.ground_altitude = ground_altitude;
     this.speed = speed;
     this.heading = heading;
@@ -32,13 +40,14 @@ export class Aircraft {
     this.elevator_position = elevator_position;
     this.spoiler_position = spoiler_position;
     this.ground_speed = ground_speed;
+    this.plane_angle = plane_angle;
   }
 
   async setThrottle(throttle: number): Promise<void> {
-    await fetch('/api/aircraft', {
-      method: 'POST',
+    await fetch("/api/aircraft", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ throttle }),
     });
@@ -46,22 +55,25 @@ export class Aircraft {
   }
 
   async setControls(aileron: number, elevator: number): Promise<void> {
-    await fetch('/api/aircraft', {
-      method: 'POST',
+    await fetch("/api/aircraft", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ aileron_position: aileron, elevator_position: elevator }),
+      body: JSON.stringify({
+        aileron_position: aileron,
+        elevator_position: elevator,
+      }),
     });
     this.aileron_position = aileron;
     this.elevator_position = elevator;
   }
 
   async setAileronPosition(position: number): Promise<void> {
-    await fetch('/api/aircraft', {
-      method: 'POST',
+    await fetch("/api/aircraft", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ aileron_position: position }),
     });
@@ -69,10 +81,10 @@ export class Aircraft {
   }
 
   async setRudderPosition(position: number): Promise<void> {
-    await fetch('/api/aircraft', {
-      method: 'POST',
+    await fetch("/api/aircraft", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ rudder_position: position }),
     });
@@ -80,10 +92,10 @@ export class Aircraft {
   }
 
   async setElevatorPosition(position: number): Promise<void> {
-    await fetch('/api/aircraft', {
-      method: 'POST',
+    await fetch("/api/aircraft", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ elevator_position: position }),
     });
@@ -91,10 +103,10 @@ export class Aircraft {
   }
 
   async setSpoilerPosition(position: number): Promise<void> {
-    await fetch('/api/aircraft', {
-      method: 'POST',
+    await fetch("/api/aircraft", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ spoiler_position: position }),
     });
@@ -102,22 +114,25 @@ export class Aircraft {
   }
 
   static async current(): Promise<Aircraft> {
-    const response = await fetch('/api/aircraft');
+    const response = await fetch("/api/aircraft");
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
     const data = await response.json();
     return new Aircraft(
       data.altitude,
+      data.latitude,
+      data.longitude,
       data.ground_altitude,
       data.ground_speed,
+      data.plane_angle,
       data.speed,
       data.heading,
       data.throttle,
       data.aileron_position,
       data.rudder_position,
       data.elevator_position,
-      data.spoiler_position
+      data.spoiler_position,
     );
   }
 }

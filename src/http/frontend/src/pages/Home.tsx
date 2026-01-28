@@ -4,7 +4,7 @@ import { Aircraft } from "../models/aircraft";
 import Dashboard from "../components/dashboard";
 import { Lever } from "../components/lever";
 import RudderController from "../components/rudder-controller";
-
+import { Map } from "../components/map";
 
 export default function Home() {
   const [aircraft, setAircraft] = useState<Aircraft | null>(null);
@@ -36,15 +36,15 @@ export default function Home() {
 
   const onJoystickRelease = async () => {
     await aircraft?.setControls(0, 0);
-  }
+  };
 
   if (!aircraft) {
     return (
       <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-        <p className="text-gray-600">Loading aircraft data...</p>
-      </div>
+        <div className="flex flex-col items-center gap-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+          <p className="text-gray-600">Loading aircraft data...</p>
+        </div>
       </div>
     );
   }
@@ -52,13 +52,16 @@ export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center gap-8">
       <h1 className="text-3xl font-bold">Aircraft Controller</h1>
-      <Dashboard 
+      <Map latitude={aircraft.latitude} longitude={aircraft.longitude} />
+      <Dashboard
         altitude={aircraft.altitude}
         groundAltitude={aircraft.ground_altitude}
         speed={aircraft.speed}
         heading={aircraft.heading}
         groundSpeed={aircraft.ground_speed}
+        planeAngle={aircraft.plane_angle}
       />
+
       <div className="flex items-center justify-center gap-16 md:flex-row flex-col">
         <Joystick onMove={onJoystickMove} onRelease={onJoystickRelease} />
 
@@ -86,5 +89,5 @@ export default function Home() {
         />
       </div>
     </div>
-  )
+  );
 }

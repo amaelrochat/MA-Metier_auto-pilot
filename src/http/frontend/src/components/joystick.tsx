@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from "react";
 
 interface JoystickState {
   x: number;
@@ -46,21 +46,21 @@ export const Joystick: React.FC<JoystickProps> = ({ onMove, onRelease }) => {
       onRelease?.();
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
     };
   }, [isDragging, onMove, onRelease]);
 
   return (
     <div className="flex items-center justify-center">
       <div
-      ref={containerRef}
-      className="relative w-48 h-48 bg-gray-900 rounded-full shadow-lg border-2 border-gray-700 cursor-grab active:cursor-grabbing flex items-center justify-center"
-      onMouseDown={() => setIsDragging(true)}
+        ref={containerRef}
+        className="relative w-48 h-48 bg-gray-900 rounded-full shadow-lg border-2 border-gray-700 cursor-grab active:cursor-grabbing flex items-center justify-center"
+        onMouseDown={() => setIsDragging(true)}
       >
         {/* Center dot */}
         <div className="absolute w-1 h-1 bg-gray-600 rounded-full" />
@@ -70,7 +70,7 @@ export const Joystick: React.FC<JoystickProps> = ({ onMove, onRelease }) => {
           ref={knobRef}
           className="absolute w-8 h-8 bg-blue-500 rounded-full shadow-md"
           style={{
-          transform: `translate(${position.x}px, ${position.y}px)`,
+            transform: `translate(${position.x}px, ${position.y}px)`,
           }}
         />
       </div>
