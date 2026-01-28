@@ -13,51 +13,58 @@ def test_slope_analysis():
 
     obj = Session(
         date_time="2026-01-15 15:41",
-        glider_model="glider",
-        takeoff_location="ste-croix",
     )
     s.add(obj)
     s.commit()
     s.refresh(obj)
 
     telemetry_points = [
-    Telemetry(
-        latitude=46.8223,
-        longitude=6.8223,
-        altitude=1200,
-        horizontal_speed=38.2,
-        vertical_speed=1.6,
-        time_since_departure="0:15",
-        session_id=1,
-    ),
-    Telemetry(
-        latitude=46.8250,
-        longitude=6.8300,
-        altitude=1050,
-        horizontal_speed=38.2,
-        vertical_speed=1.6,
-        time_since_departure="0:30",
-        session_id=1,
-    ),
-    Telemetry(
-        latitude=46.8285,
-        longitude=6.8400,
-        altitude=900,
-        horizontal_speed=38.2,
-        vertical_speed=1.6,
-        time_since_departure="0:45",
-        session_id=1,
-    ),
-    Telemetry(
-        latitude=46.8320,
-        longitude=6.8520,
-        altitude=750,
-        horizontal_speed=38.2,
-        vertical_speed=1.6,
-        time_since_departure="1:00",
-        session_id=1,
-    )
+        Telemetry(
+            date_time="2023-11-20 10:15",
+            altitude=12000.0,
+            latitude=37.7749,
+            longitude=-122.4194,
+            ground_altitude=30.0,
+            speed=250.5,
+            ground_speed=240.2,
+            heading=90.0,
+            plane_angle=2.5
+        ),
+        Telemetry(
+            date_time="2023-11-20 10:15",
+            altitude=12150.0,
+            latitude=37.7755,
+            longitude=-122.4188,
+            ground_altitude=30.0,
+            speed=252.0,
+            ground_speed=241.8,
+            heading=91.0,
+            plane_angle=2.7
+        ),
+        Telemetry(
+            date_time="2023-11-20 10:15",
+            altitude=12300.0,
+            latitude=37.7761,
+            longitude=-122.4182,
+            ground_altitude=30.0,
+            speed=253.6,
+            ground_speed=243.1,
+            heading=92.0,
+            plane_angle=2.9
+        ),
+        Telemetry(
+            date_time="2023-11-20 10:15",
+            altitude=12450.0,
+            latitude=37.7767,
+            longitude=-122.4176,
+            ground_altitude=30.0,
+            speed=255.1,
+            ground_speed=244.6,
+            heading=93.0,
+            plane_angle=3.1
+        ),
     ]
+
 
     for obj in telemetry_points:
         s.add(obj)
@@ -70,7 +77,5 @@ def test_slope_analysis():
 
     r = calculate_slope(1)
     print(r)
-
-    assert r == r
 
     os.remove("src/databases/test_database.db")
