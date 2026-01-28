@@ -102,7 +102,7 @@ class TestVirtualAircraftSetters:
     def test_to_array(self, virtual_aircraft, mock_aircraft_requests):
         mock_aircraft_requests.get.side_effect = [
             10000.0, 500.0, 130.0, 150.0, 270.0,
-            0.75, 0.1, -0.05, 0.0, 0.0
+            0.75, 0.1, -0.05, 0.0, 0.0, 0.0
         ]
         result = virtual_aircraft.to_array()
         assert result == {
@@ -116,4 +116,6 @@ class TestVirtualAircraftSetters:
             "rudder_position": -0.05,
             "elevator_position": 0.0,
             "spoiler_position": 0.0,
+            "plane_angle": 0.0
+
         }
