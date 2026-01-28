@@ -58,5 +58,7 @@ class AircraftService:
             heading=self.aircraft.heading,
             latitude=self.aircraft.latitude,
             longitude=self.aircraft.longitude,
-            plane_angle=self.aircraft.plane_angle
+            plane_angle=self.aircraft.plane_angle,
+            angle_of_attack=self.aircraft.angle_of_attack,
+            plane_pitch_angle=self.aircraft.plane_pitch_angle
         )
