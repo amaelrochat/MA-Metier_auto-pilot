@@ -18,13 +18,12 @@ altitude = 10000
 
 
 async def autopilot():
-    if not autopilot_status:
-        return
+    global autopilot_status, heading, speed, altitude
     while autopilot_status:
         AutoPilotUtils.maintain_heading(aircraft_service, heading)
         AutoPilotUtils.maintain_speed(aircraft_service, speed)
         AutoPilotUtils.maintain_altitude(aircraft_service, altitude)
-        await asyncio.sleep(0.25)
+        await asyncio.sleep(0.05)
 
 
 @router.get("")
@@ -59,6 +58,6 @@ async def set_autopilot(controls: dict, background_tasks: BackgroundTasks):
     heading = controls.get("heading", heading)
     speed = controls.get("speed", speed)
     altitude = controls.get("altitude", altitude)
-    if autopilot_status:
+    if controls.get("enabled", False):
         background_tasks.add_task(autopilot)
     return {"enabled": autopilot_status, "heading": heading, "speed": speed, "altitude": altitude}
