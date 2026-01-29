@@ -8,3 +8,4 @@ def auto_pilot(args):
     while True:
         AutoPilotUtils.maintain_heading(aircraft_service, 90)
         AutoPilotUtils.maintain_speed(aircraft_service, 70)
+        AutoPilotUtils.maintain_altitude(aircraft_service, 10000)

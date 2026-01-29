@@ -46,3 +46,13 @@ class AutoPilotUtils:
 
         AutoPilotUtils.maintain_pitch_angle(
             aircraft_service, desired_plane_pitch_angle)
+
+    @staticmethod
+    def maintain_altitude(aircraft_service: AircraftService, altitude_to_maintain: float):
+        plane_state = aircraft_service.get_aircraft_state()
+        current_altitude = plane_state['altitude']
+        altitude_error = altitude_to_maintain - current_altitude
+
+        desired_throttle = max(0, min(100, altitude_error + 18.5))
+
+        aircraft_service.set_throttle(desired_throttle)
