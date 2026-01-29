@@ -217,4 +217,5 @@ __marimo__/
 
 *.sqlite3
 *.db
+*.db-journal
 .DS_Store
