@@ -29,9 +29,6 @@ class AutoPilotUtils:
 
         heading_error = (heading_error + Math.pi) % (2 * Math.pi) - Math.pi
 
-        print(
-            f"Current Heading: {current_heading}, Target Heading: {heading_degrees}, Heading Error: {heading_error}")
-
         AutoPilotUtils.maintain_angle(
             aircraft_service, heading_error)
 

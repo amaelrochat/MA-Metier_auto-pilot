@@ -5,6 +5,7 @@ import Dashboard from "../components/dashboard";
 import { Lever } from "../components/lever";
 import RudderController from "../components/rudder-controller";
 import { Map } from "../components/map";
+import { AutopilotDashboard } from "../components/autopilot";
 
 export default function Home() {
   const [aircraft, setAircraft] = useState<Aircraft | null>(null);
@@ -90,6 +91,7 @@ export default function Home() {
           }}
         />
       </div>
+      <AutopilotDashboard />
     </div>
   );
 }
