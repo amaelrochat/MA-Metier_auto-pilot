@@ -45,7 +45,7 @@ class TestVirtualAircraftProperties:
         mock_aircraft_requests.get.return_value = 270.0
         assert virtual_aircraft.heading == 270.0
         mock_aircraft_requests.get.assert_called_with(
-            "MAGNETIC_COMPASS")
+            "HEADING_INDICATOR")
 
     def test_latitude(self, virtual_aircraft, mock_aircraft_requests):
         mock_aircraft_requests.get.return_value = 37.7749

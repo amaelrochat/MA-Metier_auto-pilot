@@ -22,19 +22,18 @@ class AutoPilotUtils:
 
     @staticmethod
     def maintain_heading(aircraft_service: AircraftService, heading_degrees: float):
+        heading_degrees = heading_degrees / 180 * Math.pi
         plane_state = aircraft_service.get_aircraft_state()
         current_heading = plane_state['heading']
-        heading_error = heading_degrees - current_heading
+        heading_error = current_heading - heading_degrees
 
-        if heading_error > 180:
-            heading_error -= 360
-        elif heading_error < -180:
-            heading_error += 360
+        heading_error = (heading_error + Math.pi) % (2 * Math.pi) - Math.pi
 
-        desired_angle = -(heading_error)
+        print(
+            f"Current Heading: {current_heading}, Target Heading: {heading_degrees}, Heading Error: {heading_error}")
 
         AutoPilotUtils.maintain_angle(
-            aircraft_service, Math.radians(desired_angle))
+            aircraft_service, heading_error)
 
     @staticmethod
     def maintain_speed(aircraft_service: AircraftService, speed_to_maintain: float):

@@ -46,7 +46,9 @@ const Dashboard: React.FC<DashboardProps> = ({
         </div>
         <div className="bg-gray-700 p-4 rounded border border-cyan-500">
           <p className="text-gray-400 text-sm uppercase">Heading</p>
-          <p className="text-xl font-bold text-cyan-400 truncate">{heading}°</p>
+          <p className="text-xl font-bold text-cyan-400 truncate">
+            {heading} rad
+          </p>
         </div>
         <div className="bg-gray-700 p-4 rounded border border-cyan-500">
           <p className="text-gray-400 text-sm uppercase">Ground Speed</p>
